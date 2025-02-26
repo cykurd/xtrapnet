@@ -25,10 +25,10 @@ features = np.random.uniform(-3.14, 3.14, (100, 2)).astype(np.float32) labels = 
 # Train the model
 net = XtrapNet(input_dim=2) trainer = XtrapTrainer(net) trainer.train(labels, features)
 
-Define an extrapolation-aware controller
+# Define an extrapolation-aware controller
 controller = XtrapController( trained_model=net, train_features=features, train_labels=labels, mode='warn' )
 
-Test prediction with OOD handling
+# Test prediction with OOD handling
 test_input = np.array([[5.0, -3.5]]) # OOD point prediction = controller.predict(test_input) print("Prediction:", prediction)
 ```
 
