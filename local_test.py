@@ -43,11 +43,24 @@ for i, p in enumerate(test_points):
     print(f"Input: {p} → Prediction: {predictions[i]:.4f}")
 
 # Test different fallback strategies
-modes = ['clip', 'zero', 'nearest_data', 'symmetry', 'highest_confidence', 'backup']
+modes = ['clip', 'zero', 'nearest_data', 'symmetry', 'highest_confidence', 'backup', 'deep_ensemble']
+
+ensemble = [net, XtrapNet(input_dim=2)]
+trainer2 = XtrapTrainer(ensemble[1], num_epochs=50)
+trainer2.train(labels, features)
 
 for mode in modes:
     print(f"\nTesting mode: {mode}")
-    xtrap_ctrl = XtrapController(trained_model=net, train_features=features, train_labels=labels, mode=mode)
+    if mode == 'deep_ensemble':
+        xtrap_ctrl = XtrapController(
+            trained_model=net,
+            train_features=features,
+            train_labels=labels,
+            mode=mode,
+            ensemble_models=ensemble,
+        )
+    else:
+        xtrap_ctrl = XtrapController(trained_model=net, train_features=features, train_labels=labels, mode=mode)
     predictions = xtrap_ctrl.predict(test_points)
     for i, p in enumerate(test_points):
         print(f"Mode: {mode} | Input: {p} → Prediction: {predictions[i]:.4f}")

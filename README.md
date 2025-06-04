@@ -45,6 +45,8 @@ XtrapNet allows you to control how the model reacts to out-of-distribution (OOD)
 | error           | Raises an error when encountering OOD data |
 | highest_confidence | Selects the lowest-variance prediction |
 | backup          | Uses a secondary model when uncertainty is high |
+| deep_ensemble   | Averages predictions from multiple expert models |
+| llm_assist      | Queries an LLM for a fallback prediction |
 
 
 ## Visualizing Extrapolation Behavior
