@@ -1,14 +1,28 @@
+import os
 import torch
 import numpy as np
 from scipy.spatial import KDTree
 
+try:
+    from .anomaly import IsolationDetector
+except Exception:  # pragma: no cover - sklearn optional
+    IsolationDetector = None
+
+try:
+    import openai
+except Exception:  # pragma: no cover - openai is optional
+    openai = None
+
 class XtrapController:
-    def __init__(self, trained_model, train_features, train_labels, mode='warn', backup_model=None):
+    def __init__(self, trained_model, train_features, train_labels, mode='warn',
+                 backup_model=None, ensemble_models=None, anomaly_detector=None):
         self.model = trained_model
         self.backup_model = backup_model
         self.mode = mode
         self.train_features = train_features
         self.train_labels = train_labels
+        self.ensemble_models = ensemble_models or []
+        self.anomaly_detector = anomaly_detector
 
         with torch.no_grad():
             preds = self.model.predict(self.train_features)
@@ -16,8 +30,18 @@ class XtrapController:
         self.max_pred = np.max(preds)
 
         self.kdtree = KDTree(self.train_features)
+        if self.anomaly_detector is not None:
+            try:
+                self.anomaly_detector.fit(self.train_features)
+            except Exception:
+                self.anomaly_detector = None
 
     def is_ood(self, x):
+        if self.anomaly_detector is not None:
+            try:
+                return self.anomaly_detector.is_ood(x)
+            except Exception:
+                pass
         return x[0] < 0 and x[1] > 0  # Example condition
 
     def predict(self, features):
@@ -49,6 +73,37 @@ class XtrapController:
                         res = self.backup_model.predict(row.reshape(1, -1))[0][0]
                     else:
                         raise ValueError("Backup model not provided!")
+                elif self.mode == 'deep_ensemble':
+                    if not self.ensemble_models:
+                        raise ValueError("Ensemble models not provided!")
+                    preds = [m.predict(row.reshape(1, -1))[0][0] for m in self.ensemble_models]
+                    res = float(np.mean(preds))
+                elif self.mode == 'anomaly':
+                    if self.anomaly_detector is None:
+                        raise ValueError("Anomaly detector not provided!")
+                    if self.anomaly_detector.is_ood(row):
+                        res = 0.0
+                    else:
+                        res = self.model.predict(row.reshape(1, -1))[0][0]
+                elif self.mode == 'llm_assist':
+                    if openai is None:
+                        raise ImportError("openai package is required for llm_assist mode")
+                    if not os.getenv("OPENAI_API_KEY"):
+                        raise RuntimeError("OPENAI_API_KEY environment variable not set")
+                    prompt = (
+                        f"Given the features {row.tolist()}, predict the target value "
+                        "for our regression task. Respond with only the number."
+                    )
+                    completion = openai.Completion.create(
+                        model="text-davinci-003",
+                        prompt=prompt,
+                        max_tokens=8,
+                        temperature=0.0,
+                    )
+                    try:
+                        res = float(completion.choices[0].text.strip().split()[0])
+                    except Exception:
+                        res = self.model.predict(row.reshape(1, -1))[0][0]
                 else:
                     res = self.model.predict(row.reshape(1, -1))[0][0]
             else:

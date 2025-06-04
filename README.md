@@ -5,10 +5,12 @@
 
 XtrapNet is a cutting-edge deep learning framework designed to handle out-of-distribution (OOD) extrapolation in neural networks. Unlike traditional models that fail when encountering unseen data, XtrapNet:
 
-- ✅ Detects OOD inputs and allows custom fallback behaviors  
-- ✅ Supports ensemble uncertainty quantification  
-- ✅ Offers multiple extrapolation control mechanisms  
-- ✅ Works with PyTorch and integrates seamlessly with any model  
+- ✅ Detects OOD inputs and allows custom fallback behaviors
+- ✅ Supports ensemble uncertainty quantification
+- ✅ Offers multiple extrapolation control mechanisms
+- ✅ Provides Bayesian neural network variants for principled uncertainty
+- ✅ Includes anomaly detection via IsolationForest
+- ✅ Works with PyTorch and integrates seamlessly with any model
 
 ## Installation
 To install XtrapNet:
@@ -16,20 +18,39 @@ To install XtrapNet:
 
 ## Usage Example
 ```
-import numpy as np 
+import numpy as np
 from xtrapnet import XtrapNet, XtrapTrainer, XtrapController
+from xtrapnet import BayesianXtrapNet, BayesianTrainer
+from xtrapnet import IsolationDetector
 
 # Generate dummy training data
-features = np.random.uniform(-3.14, 3.14, (100, 2)).astype(np.float32) labels = np.sin(features[:, 0]) * np.cos(features[:, 1]).reshape(-1, 1)
+features = np.random.uniform(-3.14, 3.14, (100, 2)).astype(np.float32)
+labels = np.sin(features[:, 0]) * np.cos(features[:, 1]).reshape(-1, 1)
 
 # Train the model
-net = XtrapNet(input_dim=2) trainer = XtrapTrainer(net) trainer.train(labels, features)
+net = XtrapNet(input_dim=2)
+trainer = XtrapTrainer(net)
+trainer.train(labels, features)
+
+# Train a Bayesian variant as well
+bnn = BayesianXtrapNet(input_dim=2)
+btrainer = BayesianTrainer(bnn, num_epochs=200)
+btrainer.train(labels, features)
 
 # Define an extrapolation-aware controller
-controller = XtrapController( trained_model=net, train_features=features, train_labels=labels, mode='warn' )
+detector = IsolationDetector()
+controller = XtrapController(
+    trained_model=net,
+    train_features=features,
+    train_labels=labels,
+    mode='anomaly',
+    anomaly_detector=detector
+)
 
 # Test prediction with OOD handling
-test_input = np.array([[5.0, -3.5]]) # OOD point prediction = controller.predict(test_input) print("Prediction:", prediction)
+test_input = np.array([[5.0, -3.5]])  # OOD point
+prediction = controller.predict(test_input)
+print("Prediction:", prediction)
 ```
 
 ## Extrapolation Handling Modes
@@ -45,6 +66,9 @@ XtrapNet allows you to control how the model reacts to out-of-distribution (OOD)
 | error           | Raises an error when encountering OOD data |
 | highest_confidence | Selects the lowest-variance prediction |
 | backup          | Uses a secondary model when uncertainty is high |
+| deep_ensemble   | Averages predictions from multiple expert models |
+| llm_assist      | Queries an LLM for a fallback prediction |
+| anomaly         | Uses IsolationForest to flag and zero anomalous inputs |
 
 
 ## Visualizing Extrapolation Behavior
