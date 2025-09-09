@@ -27,6 +27,15 @@ from .llm import (
     LLMDecisionMaker
 )
 
+# Adaptive Learning & Meta-Learning (v0.6.0)
+from .adaptive import (
+    MetaLearner,
+    OnlineAdaptation,
+    ActiveLearning,
+    ContinualLearning,
+    MemoryBank
+)
+
 __all__ = [
     "XtrapNet",
     "XtrapTrainer", 
@@ -48,4 +57,10 @@ __all__ = [
     "LLMAssistant",
     "OODExplainer",
     "LLMDecisionMaker",
+    # Adaptive learning components
+    "MetaLearner",
+    "OnlineAdaptation",
+    "ActiveLearning",
+    "ContinualLearning",
+    "MemoryBank",
 ]

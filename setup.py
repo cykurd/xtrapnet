@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='xtrapnet',
-    version='0.5.0',
+    version='0.6.0',
     packages=find_packages(),
     install_requires=[
         'torch>=2.0.0', 
