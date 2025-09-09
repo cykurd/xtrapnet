@@ -20,6 +20,13 @@ from .physics import (
     DomainAwareExtrapolation
 )
 
+# LLM-Assisted Extrapolation (v0.5.0)
+from .llm import (
+    LLMAssistant,
+    OODExplainer,
+    LLMDecisionMaker
+)
+
 __all__ = [
     "XtrapNet",
     "XtrapTrainer", 
@@ -37,4 +44,8 @@ __all__ = [
     "PhysicsInformedNN",
     "PhysicsLoss",
     "DomainAwareExtrapolation",
+    # LLM components
+    "LLMAssistant",
+    "OODExplainer",
+    "LLMDecisionMaker",
 ]

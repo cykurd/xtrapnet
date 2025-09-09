@@ -2,14 +2,15 @@ from setuptools import setup, find_packages
 
 setup(
     name='xtrapnet',
-    version='0.4.0',
+    version='0.5.0',
     packages=find_packages(),
     install_requires=[
         'torch>=2.0.0', 
         'numpy>=1.21.0', 
         'scipy>=1.7.0',
         'scikit-learn>=1.0.0',
-        'matplotlib>=3.5.0'
+        'matplotlib>=3.5.0',
+        'transformers>=4.20.0'
     ],
     author='cykurd',
     author_email='cykurd@gmail.com',
