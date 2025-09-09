@@ -4,6 +4,8 @@ setup(
     name='xtrapnet',
     version='0.2.0',
     packages=find_packages(),
+    py_modules=['model', 'trainer', 'controller', 'config', 'pipeline'],
+    package_data={'xtrapnet': ['*.py']},
     install_requires=['torch>=2.0.0', 'numpy', 'scipy'],
     author='cykurd',
     author_email='cykurd@gmail.com',

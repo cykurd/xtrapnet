@@ -1,3 +1,28 @@
+Metadata-Version: 2.2
+Name: xtrapnet
+Version: 0.2.0
+Summary: A robust package for extrapolation control in neural networks
+Home-page: https://github.com/cykurd/xtrapnet
+Author: cykurd
+Author-email: cykurd@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: torch>=2.0.0
+Requires-Dist: numpy
+Requires-Dist: scipy
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
 # XtrapNet - Extrapolation-Aware Neural Networks  
 [![PyPI Version](https://img.shields.io/pypi/v/xtrapnet)](https://pypi.org/project/xtrapnet/)  
 [![Python Version](https://img.shields.io/pypi/pyversions/xtrapnet)](https://pypi.org/project/xtrapnet/)  
