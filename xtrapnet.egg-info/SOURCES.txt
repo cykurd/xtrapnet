@@ -11,3 +11,9 @@ xtrapnet.egg-info/SOURCES.txt
 xtrapnet.egg-info/dependency_links.txt
 xtrapnet.egg-info/requires.txt
 xtrapnet.egg-info/top_level.txt
+xtrapnet/bayesian/__init__.py
+xtrapnet/bayesian/bnn.py
+xtrapnet/bayesian/conformal.py
+xtrapnet/bayesian/mcmc.py
+xtrapnet/bayesian/uncertainty.py
+xtrapnet/bayesian/variational.py

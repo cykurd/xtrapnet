@@ -13,6 +13,13 @@ from .bayesian import (
     BayesianConformalPredictor
 )
 
+# Physics-Informed Neural Networks (v0.4.0)
+from .physics import (
+    PhysicsInformedNN,
+    PhysicsLoss,
+    DomainAwareExtrapolation
+)
+
 __all__ = [
     "XtrapNet",
     "XtrapTrainer", 
@@ -26,4 +33,8 @@ __all__ = [
     "VariationalBNN", 
     "UncertaintyDecomposition",
     "BayesianConformalPredictor",
+    # Physics components
+    "PhysicsInformedNN",
+    "PhysicsLoss",
+    "DomainAwareExtrapolation",
 ]
