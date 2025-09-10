@@ -68,7 +68,7 @@ from .uncertainty.conformal import ConformalCalibrator
 # Ensemble methods
 from .wrappers.ensemble import EnsembleWrapper
 
-__version__ = "0.8.0"
+__version__ = "0.9.0"
 
 __all__ = [
     # Core technical contributions

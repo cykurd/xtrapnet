@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='xtrapnet',
-    version='0.8.0',
+    version='0.9.0',
     packages=find_packages(),
     install_requires=[
         'torch>=2.0.0', 
@@ -17,7 +17,7 @@ setup(
     ],
     author='cykurd',
     author_email='cykurd@gmail.com',
-    description='A robust package for extrapolation control in neural networks',
+    description='Novel framework for extrapolation control with Adaptive Uncertainty Decomposition, Constraint Satisfaction Networks, and Extrapolation-Aware Meta-Learning',
     long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/cykurd/xtrapnet',

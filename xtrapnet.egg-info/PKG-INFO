@@ -1,7 +1,7 @@
 Metadata-Version: 2.4
 Name: xtrapnet
-Version: 0.3.0
-Summary: A robust package for extrapolation control in neural networks
+Version: 0.9.0
+Summary: Novel framework for extrapolation control with Adaptive Uncertainty Decomposition, Constraint Satisfaction Networks, and Extrapolation-Aware Meta-Learning
 Home-page: https://github.com/cykurd/xtrapnet
 Author: cykurd
 Author-email: cykurd@gmail.com
@@ -15,6 +15,10 @@ Requires-Dist: numpy>=1.21.0
 Requires-Dist: scipy>=1.7.0
 Requires-Dist: scikit-learn>=1.0.0
 Requires-Dist: matplotlib>=3.5.0
+Requires-Dist: transformers>=4.20.0
+Requires-Dist: flask>=2.0.0
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: psutil>=5.8.0
 Dynamic: author
 Dynamic: author-email
 Dynamic: classifier
