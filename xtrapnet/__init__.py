@@ -1,134 +1,112 @@
+"""
+XtrapNet - Extrapolation-Aware Neural Networks
+
+A comprehensive framework for handling out-of-distribution extrapolation
+in neural networks with novel technical contributions:
+
+1. Adaptive Uncertainty Decomposition (AUD) - Uncertainty quantification that adapts
+   based on local data density and model confidence
+2. Constraint Satisfaction Networks (CSN) - Physics-informed extrapolation with
+   explicit constraint satisfaction
+3. Extrapolation-Aware Meta-Learning (EAML) - Meta-learning for domain adaptation
+   with extrapolation capabilities
+4. Comprehensive SOTA benchmarking against established methods
+"""
+
+# Core technical contributions
+from .core import (
+    # Adaptive Uncertainty Decomposition
+    AdaptiveUncertaintyLayer,
+    HierarchicalUncertaintyNetwork,
+    DensityAwareOODDetector,
+    UncertaintyComponents,
+    
+    # Constraint Satisfaction Networks
+    ConstraintSatisfactionNetwork,
+    AdaptivePhysicsNetwork,
+    ExtrapolationConfidenceEstimator,
+    PhysicsConstraint,
+    conservation_constraint,
+    monotonicity_constraint,
+    symmetry_constraint,
+    boundedness_constraint,
+    smoothness_constraint,
+    
+    # Extrapolation-Aware Meta-Learning
+    ExtrapolationAwareMetaLearner,
+    DomainAdaptiveExtrapolation,
+    ExtrapolationBenchmark,
+    MetaTask,
+    
+    # SOTA Benchmarking
+    SOTABenchmark,
+    DeepEnsemble,
+    MCDropout,
+    EvidentialDeepLearning,
+    MahalanobisOOD,
+    BenchmarkResult
+)
+
+# Legacy components (for backward compatibility)
 from .model import XtrapNet
 from .trainer import XtrapTrainer
 from .controller import XtrapController
-from .config import PipelineConfig, default_config
 from .pipeline import XtrapPipeline
+from .config import PipelineConfig, default_config
+
+# OOD Detection
+from .ood.detectors import (
+    MahalanobisDetector,
+    KNNDetector,
+    BaseDetector,
+    NullDetector
+)
+
+# Uncertainty Quantification
+from .uncertainty.conformal import ConformalCalibrator
+
+# Ensemble methods
 from .wrappers.ensemble import EnsembleWrapper
 
-# Bayesian Neural Networks (v0.3.0)
-from .bayesian import (
-    BayesianNeuralNetwork,
-    VariationalBNN,
-    UncertaintyDecomposition,
-    BayesianConformalPredictor
-)
-
-# Physics-Informed Neural Networks (v0.4.0)
-from .physics import (
-    PhysicsInformedNN,
-    PhysicsLoss,
-    DomainAwareExtrapolation
-)
-
-# LLM-Assisted Extrapolation (v0.5.0)
-from .llm import (
-    LLMAssistant,
-    OODExplainer,
-    LLMDecisionMaker
-)
-
-# Adaptive Learning & Meta-Learning (v0.6.0)
-from .adaptive import (
-    MetaLearner,
-    OnlineAdaptation,
-    ActiveLearning,
-    ContinualLearning,
-    MemoryBank
-)
-
-# Production-Ready Anomaly Detection (v0.7.0)
-from .anomaly import (
-    MultiModalAnomalyDetector,
-    RealTimeMonitor,
-    ExplainableAnomalyDetector,
-    DeploymentTools,
-    AnomalyBenchmark
-)
-
-# Comprehensive Benchmarking & Evaluation (v0.8.0)
-from .benchmarks import (
-    # Evaluation metrics
-    EvaluationMetrics,
-    OODDetectionMetrics,
-    UncertaintyMetrics,
-    ExtrapolationMetrics,
-    AnomalyDetectionMetrics,
-    
-    # Benchmark datasets
-    BenchmarkDataset,
-    SyntheticOODDataset,
-    RealWorldOODDataset,
-    AnomalyDetectionDataset,
-    
-    # Benchmark suites
-    BenchmarkSuite,
-    BenchmarkConfig,
-    OODBenchmark,
-    UncertaintyBenchmark,
-    ExtrapolationBenchmark,
-    AnomalyBenchmark as BenchmarkAnomalyBenchmark,
-    FullSystemBenchmark,
-    
-    # Reporting
-    BenchmarkReport,
-    ComparisonReport,
-    PerformanceReport,
-    BenchmarkReporter
-)
+__version__ = "0.8.0"
 
 __all__ = [
+    # Core technical contributions
+    "AdaptiveUncertaintyLayer",
+    "HierarchicalUncertaintyNetwork",
+    "DensityAwareOODDetector", 
+    "UncertaintyComponents",
+    "ConstraintSatisfactionNetwork",
+    "AdaptivePhysicsNetwork",
+    "ExtrapolationConfidenceEstimator",
+    "PhysicsConstraint",
+    "conservation_constraint",
+    "monotonicity_constraint",
+    "symmetry_constraint", 
+    "boundedness_constraint",
+    "smoothness_constraint",
+    "ExtrapolationAwareMetaLearner",
+    "DomainAdaptiveExtrapolation",
+    "ExtrapolationBenchmark",
+    "MetaTask",
+    "SOTABenchmark",
+    "DeepEnsemble",
+    "MCDropout",
+    "EvidentialDeepLearning", 
+    "MahalanobisOOD",
+    "BenchmarkResult",
+    
+    # Legacy components
     "XtrapNet",
-    "XtrapTrainer", 
-    "XtrapController",
+    "XtrapTrainer",
+    "XtrapController", 
+    "XtrapPipeline",
     "PipelineConfig",
     "default_config",
-    "XtrapPipeline",
+    "MahalanobisDetector",
+    "KNNDetector",
+    "BaseDetector",
+    "NullDetector",
+    "ConformalCalibrator",
     "EnsembleWrapper",
-    # Bayesian components
-    "BayesianNeuralNetwork",
-    "VariationalBNN", 
-    "UncertaintyDecomposition",
-    "BayesianConformalPredictor",
-    # Physics components
-    "PhysicsInformedNN",
-    "PhysicsLoss",
-    "DomainAwareExtrapolation",
-    # LLM components
-    "LLMAssistant",
-    "OODExplainer",
-    "LLMDecisionMaker",
-    # Adaptive learning components
-    "MetaLearner",
-    "OnlineAdaptation",
-    "ActiveLearning",
-    "ContinualLearning",
-    "MemoryBank",
-    # Anomaly detection components
-    "MultiModalAnomalyDetector",
-    "RealTimeMonitor",
-    "ExplainableAnomalyDetector",
-    "DeploymentTools",
-    "AnomalyBenchmark",
-    
-    # Benchmarking components
-    "EvaluationMetrics",
-    "OODDetectionMetrics",
-    "UncertaintyMetrics",
-    "ExtrapolationMetrics",
-    "AnomalyDetectionMetrics",
-    "BenchmarkDataset",
-    "SyntheticOODDataset",
-    "RealWorldOODDataset",
-    "AnomalyDetectionDataset",
-    "BenchmarkSuite",
-    "BenchmarkConfig",
-    "OODBenchmark",
-    "UncertaintyBenchmark",
-    "ExtrapolationBenchmark",
-    "BenchmarkAnomalyBenchmark",
-    "FullSystemBenchmark",
-    "BenchmarkReport",
-    "ComparisonReport",
-    "PerformanceReport",
-    "BenchmarkReporter",
 ]
