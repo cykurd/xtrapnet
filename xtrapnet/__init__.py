@@ -45,6 +45,37 @@ from .anomaly import (
     AnomalyBenchmark
 )
 
+# Comprehensive Benchmarking & Evaluation (v0.8.0)
+from .benchmarks import (
+    # Evaluation metrics
+    EvaluationMetrics,
+    OODDetectionMetrics,
+    UncertaintyMetrics,
+    ExtrapolationMetrics,
+    AnomalyDetectionMetrics,
+    
+    # Benchmark datasets
+    BenchmarkDataset,
+    SyntheticOODDataset,
+    RealWorldOODDataset,
+    AnomalyDetectionDataset,
+    
+    # Benchmark suites
+    BenchmarkSuite,
+    BenchmarkConfig,
+    OODBenchmark,
+    UncertaintyBenchmark,
+    ExtrapolationBenchmark,
+    AnomalyBenchmark as BenchmarkAnomalyBenchmark,
+    FullSystemBenchmark,
+    
+    # Reporting
+    BenchmarkReport,
+    ComparisonReport,
+    PerformanceReport,
+    BenchmarkReporter
+)
+
 __all__ = [
     "XtrapNet",
     "XtrapTrainer", 
@@ -78,4 +109,26 @@ __all__ = [
     "ExplainableAnomalyDetector",
     "DeploymentTools",
     "AnomalyBenchmark",
+    
+    # Benchmarking components
+    "EvaluationMetrics",
+    "OODDetectionMetrics",
+    "UncertaintyMetrics",
+    "ExtrapolationMetrics",
+    "AnomalyDetectionMetrics",
+    "BenchmarkDataset",
+    "SyntheticOODDataset",
+    "RealWorldOODDataset",
+    "AnomalyDetectionDataset",
+    "BenchmarkSuite",
+    "BenchmarkConfig",
+    "OODBenchmark",
+    "UncertaintyBenchmark",
+    "ExtrapolationBenchmark",
+    "BenchmarkAnomalyBenchmark",
+    "FullSystemBenchmark",
+    "BenchmarkReport",
+    "ComparisonReport",
+    "PerformanceReport",
+    "BenchmarkReporter",
 ]
