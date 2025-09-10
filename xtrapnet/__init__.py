@@ -36,6 +36,15 @@ from .adaptive import (
     MemoryBank
 )
 
+# Production-Ready Anomaly Detection (v0.7.0)
+from .anomaly import (
+    MultiModalAnomalyDetector,
+    RealTimeMonitor,
+    ExplainableAnomalyDetector,
+    DeploymentTools,
+    AnomalyBenchmark
+)
+
 __all__ = [
     "XtrapNet",
     "XtrapTrainer", 
@@ -63,4 +72,10 @@ __all__ = [
     "ActiveLearning",
     "ContinualLearning",
     "MemoryBank",
+    # Anomaly detection components
+    "MultiModalAnomalyDetector",
+    "RealTimeMonitor",
+    "ExplainableAnomalyDetector",
+    "DeploymentTools",
+    "AnomalyBenchmark",
 ]
