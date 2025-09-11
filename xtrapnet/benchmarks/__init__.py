@@ -21,6 +21,8 @@ from .benchmark_datasets import (
     AnomalyDetectionDataset
 )
 
+from .fever_dataset import FeverDataset
+
 from .benchmark_suite import (
     BenchmarkSuite,
     BenchmarkConfig,
@@ -51,6 +53,7 @@ __all__ = [
     "SyntheticOODDataset",
     "RealWorldOODDataset", 
     "AnomalyDetectionDataset",
+    "FeverDataset",
     
     # Benchmark suites
     "BenchmarkSuite",
