@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='xtrapnet',
-    version='0.9.0',
+    version='1.0.0',
     packages=find_packages(),
     install_requires=[
         'torch>=2.0.0', 
@@ -11,6 +11,7 @@ setup(
         'scikit-learn>=1.0.0',
         'matplotlib>=3.5.0',
         'transformers>=4.20.0',
+        'datasets>=2.0.0',
         'flask>=2.0.0',
         'pyyaml>=6.0',
         'psutil>=5.8.0'
